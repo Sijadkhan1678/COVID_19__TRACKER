@@ -1,12 +1,21 @@
 
 import './App.css';
+import React,{Fragment} from 'react'
+import Container from '@mui/material/Container';
+import Navbar from './components/layout/Navbar'
+import Hero from './components/Hero'
+
 
 const App = () => {
   
   return (
-    <div className="App">
-    <h1> covide 19 project setup and h</h1>
-    </div>
+    <Fragment>
+    <Navbar />
+    <Hero />
+    <Container  maxWidth="sm">
+     
+    </Container>
+    </Fragment>
   );
 }
 
