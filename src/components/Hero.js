@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia'
 import hero from './images/Hero.jpg'
 const Hero = () => {
   return(
-    <Grid  container mt={4} >
+    <Grid  container mt={0} >
     <CardMedia component='img'
      
      height='250'

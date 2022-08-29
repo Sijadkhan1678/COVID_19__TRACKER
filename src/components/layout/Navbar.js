@@ -5,13 +5,14 @@ import logo from '../images/logo.png'
 
 const ToolContainer = styled(Toolbar) ((theme)=>({
   display: 'flex',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  backgroundColor:'#2575FC'
 }))
 const Navbar = () =>{
   return(
     <AppBar position='static'> 
      <ToolContainer>
- <Avatar src={logo} alt='log'/>
+ <Avatar src={logo} alt='logo'/>
       <Typography variant='h5' ml={1}>Tracker</Typography>
        
       
