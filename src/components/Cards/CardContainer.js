@@ -1,29 +1,36 @@
-import React from 'react';
-import {Box,styled} from '@mui/material'
+import React,{Fragment} from 'react';
+import {Box,styled,Typography} from '@mui/material'
 import Cards from './Cards'
 
 const BoxContainer = styled(Box) ((theme)=>(
   {
     display: 'flex',
-   /* flexDirection: 'column', */
-    gap: '15px',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     flexWrap: 'wrap',
-    marginTop: '28px',
+    marginTop: '30px',
     flexGrow: '1',
     textAlign: 'center',
+    gap: '13px'
     
-    
-    
-
   }))
   
 const CardContainer = () => {
 
  return(
+   <Fragment>
+  <Typography variant='h4' sx={{
+                   mt:4, 
+                   py:1,               
+                   fontWeight:'400',
+                   fontSize: '1.3em'
+                     }}>
+   Covid Global Summary
+   </Typography>
    <BoxContainer >
+  
     <Cards />
     </BoxContainer>
+    </Fragment>
    )
   
 }

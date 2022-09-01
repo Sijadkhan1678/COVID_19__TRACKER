@@ -7,7 +7,10 @@ const PolarAreaGraph = ({data}) => {
   
    return(
      
-       <Box>
+       <Box sx={{
+         width:'87%',
+         mx:'auto' 
+       }}>
        <Chart
         type= 'polarArea'
         data={data}

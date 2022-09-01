@@ -6,7 +6,7 @@ const BarGraph = ({data}) => {
   
    return(
      
-       <Box>
+       <Box width='90%' mx='auto'>
        <Chart
         type= 'bar'
         data ={data}

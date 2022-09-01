@@ -17,11 +17,16 @@ console.log('in selector',e.target.value)
 }
 
 return(
- <Stack mt={4} mb={4} direction='column' justifyContent="center">
-  <Typography variant='h6' sx={{ml:3,mb:2,fontWeight:400}} > Select Graph</Typography>
-  <FormControl sx={{width:'50%',alignSelf:'center'}}>
-  <InputLabel id="demo-simple-select-label" mb='5'>Graph type</InputLabel>
+ <Stack mt={4} mb={3} direction='row' justifyContent="space-around" alignItems="center">
+  <Typography variant='h6' sx={{
+  fontWeight:300,
+  textAlign:'center'
+    
+  }} > Select Graph</Typography>
+  <FormControl sx={{width:'44%',mt:2}}>
+  <InputLabel id="demo-simple-select-label">Graph type</InputLabel>
   <Select
+    
     labelId="demo-simple-select-label"
     id="demo-simple-select"
     value={graph}

@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import Stack from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
 import BarGraph from './BarGraph';
 import PolarAreaGraph from './PolarAreaGraph'
 import LineGraph from './LineGraph';
@@ -7,7 +8,7 @@ import GraphSelector from './GraphSelector'
 
 const GraphContainer = () => {
   const [graph,setGraph] = useState('bar')
-  console.log('graph container',graph)
+  
   let data = {
      labels: ['Confirmed','Recovered','Deaths'],
      datasets: [{
@@ -20,12 +21,14 @@ const GraphContainer = () => {
   
    return(
       <Stack >
-       
+      <Paper elevation={5}>
       <LineGraph /> 
+      </Paper>
+      <Paper elevation={6} width='100%'>
        <GraphSelector graph={graph} 
        setGraph={setGraph}/>
        {graph === 'bar' ? <BarGraph data={data} /> : <PolarAreaGraph data={data} /> }
-       
+       </Paper>
       </Stack>
      )
   

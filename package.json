@@ -1,6 +1,7 @@
 {
   "name": "covid19",
-  "version": "0.1.0",
+  "author": "Sijad Khan",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
