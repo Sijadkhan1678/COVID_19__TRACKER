@@ -1,20 +1,23 @@
-import React,{useState} from 'react';
+import React,{useContext} from 'react';
 import Typography from '@mui/material/Typography'
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper'
+import Paper from '@mui/material/Paper';
+import appContext from '../context/AppContext'
 
 const CountrySelector = () => {
   
-const [country,setcountry]= useState("Global")
+const appcontext = useContext(appContext)
+const { country,countryData,setCountry,getCountries,countries } = appcontext
 
 const handleChange = (e) =>{
-setcountry(e.target.value)
- 
+setCountry(e.target.value)
+ if(country !=='Global' ) { countryData() }
 }
+ getCountries();
 
 return(
 <Paper elevation={6} sx={{width:'100%',py:2,mt:5}}>  
@@ -33,9 +36,9 @@ value={country}
 onChange={handleChange}
 >
 <MenuItem value='Global'>Global</MenuItem>
-<MenuItem value='india'>India</MenuItem>
-<MenuItem value='pakistan'>pakistan</MenuItem>
-<MenuItem value='japan'>japan</MenuItem>
+ {countries.map( country => (
+  <MenuItem  value={country}>{country} </MenuItem>
+ ))}
 </Select>
 </FormControl>
 

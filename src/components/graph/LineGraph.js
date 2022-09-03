@@ -1,15 +1,20 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {Chart} from 'react-chartjs-2'
 import 'chart.js/auto'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper'
-const LineGraph = () => {
+import appContext from '../../context/AppContext';
 
-  let data = {
-labels: [],
+const LineGraph = () => {
+   
+   const appcontext = useContext(appContext);
+   const {data,country} = appcontext;
+   const dailyData = country === 'Global' ? data.dailyData : data
+  let graphData = {
+labels: dailyData.map(data => data.confirmed),
      datasets: [{
-       label: 'Cases Report',
-       data : [],
+       label: 'Patient Report',
+       data : dailyData.map(data => data.date),
 backgroundColor: ['red','cyan']
 
 }]}
@@ -23,7 +28,7 @@ backgroundColor: ['red','cyan']
      py:2
        
      }}>
-      <Chart type='line' data={data} />
+      <Chart type='line' data={graphData} />
      </Box>
      </Paper>
      

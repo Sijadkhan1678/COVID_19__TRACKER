@@ -1,28 +1,34 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useContext} from 'react';
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Card from '@mui/material/Card'
-
+import appContext from '../../context/AppContext'
 
 
 const Cards = () => {
-  return(
-    <Fragment>
- 
-  <Card sx={{
-  maxWidth:300,
-  width:{xs:'88%',s:'60%',sm:'28%'}
+  
+  const appcontext = useContext(appContext);
+  const {data,country,countryData,getData} = appcontext
+  country === 'Global' ? getData() : countryData()
+  const summaryData = country === 'Global' ? data.global: data[data.length-1]
+  
+  return (
     
-  }} >
+  <Fragment>
+    <Card sx={{
+     maxWidth:300,
+     width:{xs:'88%',s:'60%',sm:'28%'}
+    
+     }} >
   <CardContent >
   <Typography variant='p' color='tomato' >
     Confirmed Cases
   </Typography>
    <Typography variant='h5' mt={1.5}  >
-   123,227,112
+   { summaryData.confirmed }
    </Typography>
    <Typography variant='h6' mt={1} fontWeight='400' fontSize='0.8em'>
-   Last Update on 2 aug 2022
+   Last Update on { summaryData.date }
    </Typography>
    </CardContent>
   </Card>
@@ -37,10 +43,10 @@ const Cards = () => {
     Recovered Cases
   </Typography>
    <Typography variant='h5' mt={1.5}  >
-   123,227,111
+   { summaryData.recovered }
    </Typography>
    <Typography variant='h6' mt={1} fontWeight='400' fontSize='0.8em'>
-   Last Update on 2 aug 2022
+   Last Update on {summaryData.date}
    </Typography>
    </CardContent>
   </Card>
@@ -55,15 +61,13 @@ const Cards = () => {
     Deaths Cases
   </Typography>
    <Typography variant='h5' mt={1.5}  >
-   123,227,111
+    { summaryData.deaths }
    </Typography>
    <Typography variant='h6' mt={1} fontWeight='400' fontSize='0.8em'>
-   Last Update on 2 aug 2022
+   Last Update on { summaryData.date }
    </Typography>
    </CardContent>
   </Card>
-  
-
   </Fragment>
   )
 }

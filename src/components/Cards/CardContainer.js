@@ -1,6 +1,7 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,Suspense} from 'react';
 import {Box,styled,Typography} from '@mui/material'
 import Cards from './Cards'
+import Loading  from '../layout/Loading'
 
 const BoxContainer = styled(Box) ((theme)=>(
   {
@@ -27,8 +28,9 @@ const CardContainer = () => {
    Covid Global Summary
    </Typography>
    <BoxContainer >
-  
+    <Suspense fallback={<Loading />}>
     <Cards />
+    </Suspense>
     </BoxContainer>
     </Fragment>
    )
