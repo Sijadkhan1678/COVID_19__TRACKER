@@ -4,7 +4,7 @@ import {GET_COUNTRIES,GET_DATA,SET_COUNTRY,GET_COUNTRY_DATA} from './Types'
 import appContext from './AppContext'
 import AppReducer from './AppReducer'
 
-const AppState = ({children}) => {
+const AppState = props => {
   
   const initialState = {
     countries:[],
@@ -12,16 +12,16 @@ const AppState = ({children}) => {
     country: 'Global',
     
   }
-  const [state,dispatch] = useReducer(initialState,AppReducer)
-  
+  const [state,dispatch] = useReducer(AppReducer,initialState)
+  console.log(state.country)
     // Get countries function
     const getCountries = async () => {
        try {
          const res = await axios.get('https://covid19.mathdro.id/api/countries')
-         console.log(res)
+        const data = res.data.countries
          dispatch({
           type:  GET_COUNTRIES,
-          payload : res.data
+          payload : data
          })
        } 
        catch (error) {
@@ -32,7 +32,7 @@ const AppState = ({children}) => {
     const getData = async () => {
       try {
       const url = 'https://covid19.mathdro.id/api'
-     let res = axios.get(url)
+     let res = await axios.get(url)
     const {confirmed,recovered,deaths,lastUpdate} = res.data
      
      const global= {
@@ -55,7 +55,7 @@ const AppState = ({children}) => {
        dailyData
        
      }
-     console.log(res)
+    
      dispatch({
        type : GET_DATA,
        payload : data
@@ -70,7 +70,7 @@ const AppState = ({children}) => {
     const countryData = async (country) => {
       try {
         const res = await axios.get(`https://api.covid19api.com/total/dayone/country/${country}`);
-        console.log(res)
+        
      const   data = res.data.map(data =>({
           confirmed: data.Confirmed,
           recovered: data.Recovered,
@@ -96,7 +96,7 @@ const AppState = ({children}) => {
       })
     }
     
-  <appContext.Provider value={{
+  return (<appContext.Provider value={{
         countries: state.countries,
         data: state.data,
         country: state.country,
@@ -106,8 +106,9 @@ const AppState = ({children}) => {
         setCountry
         
   }}>
-   children
+  { props.children }
   </appContext.Provider>
+  )
   
 }
 export default AppState

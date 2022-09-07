@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext,useEffect} from 'react';
 import Typography from '@mui/material/Typography'
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,17 +9,23 @@ import Paper from '@mui/material/Paper';
 import appContext from '../context/AppContext'
 
 const CountrySelector = () => {
-  
+
 const appcontext = useContext(appContext)
-const { country,countryData,setCountry,getCountries,countries } = appcontext
+const { country,setCountry,getCountries,countries} = appcontext
 
-const handleChange = (e) =>{
-setCountry(e.target.value)
- if(country !=='Global' ) { countryData() }
-}
+useEffect( ()=>{
+  
+
  getCountries();
+// eslint-disable-next-line
+},[])
 
-return(
+const handleChange = (e) =>{setCountry(e.target.value) }
+
+ 
+
+ return (
+   
 <Paper elevation={6} sx={{width:'100%',py:2,mt:5}}>  
 <Stack   direction='row' justifyContent="space-around" alignItems='center'>
 <Typography variant='h6' sx={{
@@ -35,9 +41,9 @@ id="demo-simple-select"
 value={country}
 onChange={handleChange}
 >
-<MenuItem value='Global'>Global</MenuItem>
- {countries.map( country => (
-  <MenuItem  value={country}>{country} </MenuItem>
+ <MenuItem value={country}>Global</MenuItem>
+ {countries && countries.map( country => (
+  <MenuItem key={country.name} value={country.name}>{country.name} </MenuItem>
  ))}
 </Select>
 </FormControl>

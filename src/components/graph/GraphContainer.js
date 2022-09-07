@@ -6,13 +6,17 @@ import PolarAreaGraph from './PolarAreaGraph'
 import LineGraph from './LineGraph';
 import GraphSelector from './GraphSelector'
 import appContext  from '../../context/AppContext';
+import Loading from '../layout/Loading'
 
 const GraphContainer = () => {
   
   const [graph,setGraph] = useState('bar')
   const appcontext = useContext(appContext);
   const {country,data} = appcontext;
-  const {confirmed,recovered,deaths} = country === 'Global' ? data.global : data[data.length-1]
+  
+  const summaryData = country === 'Global' ? data.global : data[data.length-1]
+   if(!summaryData) return <Loading />
+const {confirmed,recovered,deaths} =summaryData
   let graphData = {
      labels: ['Confirmed','Recovered','Deaths'],
      datasets: [{
@@ -21,10 +25,9 @@ const GraphContainer = () => {
        backgroundColor: ['#69FFF1','#F75C03','#D90368']
       } ]
   } 
-  
-  
+ 
    return(
-      <Stack >
+     <Stack >
       <Paper elevation={5}>
       <LineGraph /> 
       </Paper>
@@ -33,7 +36,7 @@ const GraphContainer = () => {
        setGraph={setGraph}/>
        {graph === 'bar' ? <BarGraph data={graphData} /> : <PolarAreaGraph data={graphData} /> }
        </Paper>
-      </Stack>
+      </Stack> 
      )
   
 }

@@ -4,7 +4,7 @@ const AppReducer = (state,action) => {
   switch (action.type) {
     case GET_COUNTRIES:
       return {
-        ...state, coutries: action.payload
+        ...state, countries: action.payload
       }
     case GET_DATA:
       return {

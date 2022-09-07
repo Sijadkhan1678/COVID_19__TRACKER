@@ -4,18 +4,22 @@ import 'chart.js/auto'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper'
 import appContext from '../../context/AppContext';
+import Loading from '../layout/Loading'
 
 const LineGraph = () => {
    
    const appcontext = useContext(appContext);
    const {data,country} = appcontext;
+ 
    const dailyData = country === 'Global' ? data.dailyData : data
+  
+  if(!dailyData) { return <Loading />  }
   let graphData = {
-labels: dailyData.map(data => data.confirmed),
+labels: dailyData.map(data => data.date),
      datasets: [{
-       label: 'Patient Report',
-       data : dailyData.map(data => data.date),
-backgroundColor: ['red','cyan']
+       label: 'Patients Report',
+       data : dailyData.map(data => data.confirmed),
+backgroundColor: 'cyan'
 
 }]}
 

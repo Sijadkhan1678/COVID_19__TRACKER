@@ -1,17 +1,25 @@
-import React,{Fragment,useContext} from 'react';
+import React,{Fragment,useContext,useEffect} from 'react';
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Card from '@mui/material/Card'
 import appContext from '../../context/AppContext'
-
+import Loading from '../layout/Loading'
 
 const Cards = () => {
   
   const appcontext = useContext(appContext);
-  const {data,country,countryData,getData} = appcontext
-  country === 'Global' ? getData() : countryData()
+  const {data,country,countryData,getData} = appcontext;
+
+
+useEffect(()=>{
+ // if country property has Global value then call getData other wise countryData 
+country === 'Global' ? getData() : countryData(country)
+// eslint-disable-next-line
+  },[country])
+// if country has country name then assign data which is array and pick its last obj other wise exract global array 
   const summaryData = country === 'Global' ? data.global: data[data.length-1]
-  
+
+if (!summaryData)  return <Loading />
   return (
     
   <Fragment>
@@ -25,7 +33,7 @@ const Cards = () => {
     Confirmed Cases
   </Typography>
    <Typography variant='h5' mt={1.5}  >
-   { summaryData.confirmed }
+   { summaryData.confirmed  }
    </Typography>
    <Typography variant='h6' mt={1} fontWeight='400' fontSize='0.8em'>
    Last Update on { summaryData.date }
@@ -43,7 +51,7 @@ const Cards = () => {
     Recovered Cases
   </Typography>
    <Typography variant='h5' mt={1.5}  >
-   { summaryData.recovered }
+   { summaryData.recovered  }
    </Typography>
    <Typography variant='h6' mt={1} fontWeight='400' fontSize='0.8em'>
    Last Update on {summaryData.date}
@@ -64,7 +72,7 @@ const Cards = () => {
     { summaryData.deaths }
    </Typography>
    <Typography variant='h6' mt={1} fontWeight='400' fontSize='0.8em'>
-   Last Update on { summaryData.date }
+   Last Update on { summaryData.date  }
    </Typography>
    </CardContent>
   </Card>
